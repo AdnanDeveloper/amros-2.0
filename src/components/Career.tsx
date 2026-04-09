@@ -10,7 +10,7 @@ const Career = () => {
   }, []);
 
   return (
-    <div className="career-section section-container">
+    <div className="career-section section-container" id="about">
       <div className="career-container">
         <h2>
           The Growth    <span>of</span>

@@ -7,14 +7,13 @@ import "./styles/ClientMarquee.css";
 gsap.registerPlugin(Draggable);
 
 const CLIENTS = [
-  { id: 1, src: "/public/images/nextBL.webp", alt: "Client 1 Logo" },
-  { id: 2, src: "/public/images/Maxlife.png", alt: "Client 2 Logo" },
-  { id: 3, src: "/public/images/nextBL.webp", alt: "Client 3 Logo" },
-  { id: 4, src: "/public/images/nextBL.webp", alt: "Client 4 Logo" },
-  { id: 5, src: "/public/images/nextBL.webp", alt: "Client 5 Logo" },
-  { id: 6, src: "/public/images/nextBL.webp", alt: "Client 6 Logo" },
-  { id: 7, src: "/public/images/nextBL.webp", alt: "Client 7 Logo" },
-  { id: 8, src: "/images/client-placeholder.svg", alt: "Client 8 Logo" },
+  { id: 1, src: "/public/images/client/1.png", alt: "Client 1 Logo" },
+  { id: 2, src: "/public/images/client/2.png", alt: "Client 2 Logo" },
+  { id: 3, src: "/public/images/client/3.png", alt: "Client 3 Logo" },
+  { id: 4, src: "/public/images/client/4.png", alt: "Client 4 Logo" },
+  { id: 5, src: "/public/images/client/5.png", alt: "Client 5 Logo" },
+  { id: 6, src: "/public/images/client/6.png", alt: "Client 6 Logo" },
+  { id: 7, src: "/public/images/client/7.png", alt: "Client 7 Logo" },
 ];
 
 export default function ClientMarquee() {

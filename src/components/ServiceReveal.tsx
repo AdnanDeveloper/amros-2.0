@@ -103,7 +103,7 @@ const ServiceReveal = () => {
   };
 
   return (
-    <div ref={sectionRef} className="sr-section">
+    <div ref={sectionRef} className="sr-section" id="services">
       <div ref={textWrapperRef} className="sr-text-wrapper">
         <h2 className="sr-heading">
           <span className="sr-dark">What services</span>

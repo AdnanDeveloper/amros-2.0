@@ -3,76 +3,40 @@ import gsap from "gsap";
 import { useLoading } from "../context/LoadingProvider";
 import "./styles/LoadingScreen.css";
 
-const LoadingScreen = ({ percent }: { percent: number }) => {
+const LETTERS = [
+  { char: "A", color: "blue" },
+  { char: "M", color: "blue" },
+  { char: "R", color: "blue" },
+  { char: "O", color: "orange" },
+  { char: "S", color: "blue" },
+];
+
+const LoadingScreen = () => {
   const { setIsLoading } = useLoading();
   const overlayRef = useRef<HTMLDivElement>(null);
   const riserRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const lineTopRef = useRef<HTMLDivElement>(null);
-  const lineBotRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const [ready, setReady] = useState(false);
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const [filled, setFilled] = useState(false);
 
-  /* ── Mark ready once assets are loaded ── */
+  /* ── Position the riser offscreen initially ── */
   useEffect(() => {
-    if (percent >= 100 && !ready) {
-      setTimeout(() => setReady(true), 400);
-    }
-  }, [percent, ready]);
-
-  /* ── Intro timeline (keep text/counter intact, simplify decoration) ── */
-  useEffect(() => {
-    const letters = textRef.current?.querySelectorAll(".ls-char");
-    if (!letters?.length) return;
     if (riserRef.current) {
       gsap.set(riserRef.current, { xPercent: -50, yPercent: 100 });
     }
-
-    const tl = gsap.timeline({ paused: true });
-    tlRef.current = tl;
-
-    tl.fromTo(
-      letters,
-      {
-        y: 42,
-        opacity: 0,
-        filter: "blur(8px)",
-      },
-      {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.06,
-      },
-      0.2
-    );
-
-    tl.to(
-      textRef.current,
-      {
-        textShadow:
-          "0 0 34px rgba(254, 139, 41, 0.52), 0 0 80px rgba(254, 139, 41, 0.24)",
-        y: -4,
-        duration: 0.55,
-        ease: "power2.inOut",
-        yoyo: true,
-        repeat: 1,
-      },
-      ">-0.1"
-    );
-    tl.play();
-
-    return () => {
-      tl.kill();
-    };
   }, []);
 
-  /* ── Exit animation once ready ── */
+  /* ── Wait for a full fill cycle (~3s), then mark as filled ── */
   useEffect(() => {
-    if (!ready) return;
+    const fillTimer = setTimeout(() => {
+      setFilled(true);
+    }, 3000);
+
+    return () => clearTimeout(fillTimer);
+  }, []);
+
+  /* ── Exit animation once filled ── */
+  useEffect(() => {
+    if (!filled) return;
 
     const exitTl = gsap.timeline({
       onComplete: () => {
@@ -85,29 +49,14 @@ const LoadingScreen = ({ percent }: { percent: number }) => {
       },
     });
 
-    const letters = textRef.current?.querySelectorAll(".ls-char");
-
-    /* 1. Fade out the AMROS text, counter, lines */
-    exitTl.to(letters!, {
-      y: -30,
+    /* 1. Fade out the AMROS loader */
+    exitTl.to(loaderRef.current, {
       opacity: 0,
+      y: -30,
       filter: "blur(6px)",
-      duration: 0.45,
+      duration: 0.5,
       ease: "power3.in",
-      stagger: 0.03,
     });
-
-    exitTl.to(
-      [lineTopRef.current, lineBotRef.current],
-      { opacity: 0, duration: 0.22, ease: "power2.out" },
-      "<"
-    );
-
-    exitTl.to(
-      counterRef.current?.parentElement!,
-      { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" },
-      "<"
-    );
 
     /* 2. Curved dark bg sweeps up from bottom to fill the screen */
     exitTl.to(
@@ -129,50 +78,25 @@ const LoadingScreen = ({ percent }: { percent: number }) => {
     return () => {
       exitTl.kill();
     };
-  }, [ready]);
-
-  /* ── Counter animation ── */
-  useEffect(() => {
-    if (!counterRef.current) return;
-    gsap.to(counterRef.current, {
-      innerText: percent,
-      duration: 0.4,
-      snap: { innerText: 1 },
-      ease: "none",
-    });
-  }, [percent]);
-
-  /* ── Split "AMROS" into chars ── */
-  const text = "AMROS";
+  }, [filled]);
 
   return (
     <div ref={overlayRef} className="ls-overlay" id="loading-screen">
       <div ref={riserRef} className="ls-riser" />
-      {/* Decorative lines */}
-      <div ref={lineTopRef} className="ls-line ls-line-top" />
-      <div ref={lineBotRef} className="ls-line ls-line-bot" />
 
       {/* Center content */}
       <div className="ls-center">
-        <div ref={textRef} className="ls-text" aria-label={text}>
-          {text.split("").map((char, i) => (
-            <span className="ls-char" key={i} style={{ display: "inline-block" }}>
-              {char}
+        <div ref={loaderRef} className="ls-loader">
+          {LETTERS.map((l, i) => (
+            <span
+              key={i}
+              className={`ls-char ls-char--${l.color}${filled ? " ls-filled" : ""}`}
+            >
+              {l.char}
             </span>
           ))}
         </div>
-
-        <div className="ls-counter">
-          <span ref={counterRef} className="ls-counter-num">0</span>
-          <span className="ls-counter-pct">%</span>
-        </div>
       </div>
-
-      {/* Corner accents */}
-      <div className="ls-corner ls-corner-tl" />
-      <div className="ls-corner ls-corner-tr" />
-      <div className="ls-corner ls-corner-bl" />
-      <div className="ls-corner ls-corner-br" />
     </div>
   );
 };

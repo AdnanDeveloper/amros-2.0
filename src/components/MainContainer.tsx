@@ -46,10 +46,10 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <HeroTextReveal />
             <Career />
             <About />
+            <ClientMarquee />
             <ServiceReveal />
             <Work />
             <ProcessSection />
-            <ClientMarquee />
             <FallingText />
             <Contact />
           </div>

@@ -1,5 +1,5 @@
 /* ============================
-   LOADING SCREEN — Premium Intro
+   LOADING SCREEN — AMROS Text Fill
    ============================ */
 
 .ls-overlay {
@@ -39,109 +39,97 @@
   z-index: 3;
 }
 
-/* ── Main text ── */
+/* ── AMROS Text-Fill Loader ── */
 
-.ls-text {
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(48px, 10vw, 140px);
-  font-weight: 700;
-  color: #075b97;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  perspective: 600px;
-  text-shadow: 0 0 26px rgba(254, 139, 41, 0.32);
-  will-change: text-shadow;
+.ls-loader {
+  display: flex;
+  font-size: clamp(60px, 12vw, 160px);
+  font-family: "Audiowide", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  gap: 0;
 }
+
+/* ── Individual letter fill ── */
 
 .ls-char {
   display: inline-block;
-  will-change: transform, opacity, filter;
-  transform-origin: center bottom;
+  color: #0000;
+  -webkit-text-stroke: 1px #5757574d;
+  background: conic-gradient(var(--fill-color) 0 0) no-repeat text;
+  background-size: 100% 0;
+  background-position-y: 100%;
+  animation:
+    ls-fill 1.5s linear infinite alternate,
+    ls-flip 3s linear infinite;
 }
 
-/* ── Loading counter ── */
-
-.ls-counter {
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
-  font-size: clamp(14px, 2vw, 20px);
-  font-weight: 400;
-  color: rgba(180, 180, 180, 0.35);
-  letter-spacing: 2px;
-  text-transform: uppercase;
+/* Color per letter */
+.ls-char--blue {
+  --fill-color: #075b97;
 }
 
-.ls-counter-num {
-  font-variant-numeric: tabular-nums;
-  min-width: 2.4ch;
-  text-align: right;
+.ls-char--orange {
+  --fill-color: #fe8b26;
 }
 
-.ls-counter-pct {
-  font-size: 0.85em;
+/* Stagger: each letter starts its fill at a different offset */
+.ls-char:nth-child(1) {
+  animation-delay: 0s, 0s;
 }
 
-/* ── Decorative horizontal lines ── */
-
-.ls-line {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  height: 1px;
-  background: rgba(5, 8, 16, 0.14);
-  transform-origin: center;
-  transform: scaleX(0);
-  will-change: transform, opacity;
-  z-index: 2;
+.ls-char:nth-child(2) {
+  animation-delay: 0.15s, 0s;
 }
 
-.ls-line-top {
-  top: 38%;
+.ls-char:nth-child(3) {
+  animation-delay: 0.3s, 0s;
 }
 
-.ls-line-bot {
-  bottom: 38%;
+.ls-char:nth-child(4) {
+  animation-delay: 0.15s, 0s;
 }
 
-/* ── Corner accents ── */
-
-.ls-corner {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-color: rgba(253, 139, 40, 0.25);
-  border-style: solid;
-  border-width: 0;
-  z-index: 2;
+.ls-char:nth-child(5) {
+  animation-delay: 0s, 0s;
 }
 
-.ls-corner-tl {
-  top: 24px;
-  left: 24px;
-  border-top-width: 1.5px;
-  border-left-width: 1.5px;
+/* Fill height animation per letter */
+@keyframes ls-fill {
+  0% {
+    background-size: 100% 0;
+  }
+
+  50% {
+    background-size: 100% 60%;
+  }
+
+  to {
+    background-size: 100% 100%;
+  }
 }
 
-.ls-corner-tr {
-  top: 24px;
-  right: 24px;
-  border-top-width: 1.5px;
-  border-right-width: 1.5px;
+/* Fill direction flip */
+@keyframes ls-flip {
+
+  0%,
+  50% {
+    background-position-y: 100%;
+  }
+
+  50.01%,
+  to {
+    background-position-y: 0;
+  }
 }
 
-.ls-corner-bl {
-  bottom: 24px;
-  left: 24px;
-  border-bottom-width: 1.5px;
-  border-left-width: 1.5px;
-}
+/* ── Filled state: solid color ── */
 
-.ls-corner-br {
-  bottom: 24px;
-  right: 24px;
-  border-bottom-width: 1.5px;
-  border-right-width: 1.5px;
+.ls-char.ls-filled {
+  animation: none;
+  -webkit-text-stroke: 0px transparent;
+  background-size: 100% 100%;
+  background-position-y: 0;
 }
 
 /* ============================
@@ -149,56 +137,13 @@
    ============================ */
 
 @media (max-width: 768px) {
-  .ls-text {
-    font-size: clamp(40px, 14vw, 80px);
-    letter-spacing: 0.08em;
-  }
-
-  .ls-line {
-    left: 5%;
-    right: 5%;
-  }
-
-  .ls-line-top {
-    top: 35%;
-  }
-
-  .ls-line-bot {
-    bottom: 35%;
-  }
-
-  .ls-corner {
-    width: 14px;
-    height: 14px;
-  }
-
-  .ls-corner-tl,
-  .ls-corner-tr {
-    top: 16px;
-  }
-
-  .ls-corner-bl,
-  .ls-corner-br {
-    bottom: 16px;
-  }
-
-  .ls-corner-tl,
-  .ls-corner-bl {
-    left: 16px;
-  }
-
-  .ls-corner-tr,
-  .ls-corner-br {
-    right: 16px;
+  .ls-loader {
+    font-size: clamp(60px, 14vw, 80px);
   }
 }
 
 @media (max-width: 480px) {
-  .ls-text {
-    font-size: clamp(36px, 16vw, 60px);
-  }
-
-  .ls-counter {
-    font-size: 12px;
+  .ls-loader {
+    font-size: clamp(50px, 16vw, 80px);
   }
 }

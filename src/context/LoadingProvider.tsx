@@ -28,7 +28,7 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <LoadingContext.Provider value={value as LoadingType}>
-      {isLoading && <LoadingScreen percent={loading} />}
+      {isLoading && <LoadingScreen />}
       <main className="main-body">{children}</main>
     </LoadingContext.Provider>
   );
