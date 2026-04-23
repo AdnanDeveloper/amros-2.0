@@ -36,16 +36,22 @@ const projectsData: Record<string, any[]> = {
       fullPageImage: "/images/work/brixsmedia.webp",
     },
     {
-      title: "21 Alloys",
-      category: "Industrial B2B Website",
-      tools: "Wordpress, Custom Theme, SEO, Keyword Research, Rank 1 in Google for Multiple Keywords",
-      fullPageImage: "/images/work/21alloys.webp",
-    },
-    {
       title: "Burhani Decor",
       category: "Interior & Wallpaper Store",
       tools: "Wordpress, Woocommerce, Custom UI, Product Catalog",
       fullPageImage: "/images/work/burhanidecor.webp",
+    },
+    {
+      title: "Amros Old Website",
+      category: "Web Developer in Mumbai",
+      tools: "Reactjs, UI/UX, Smooth Animations, Responsive Design, SEO Optimized",
+      fullPageImage: "/images/work/amros-old.webp",
+    },
+    {
+      title: "21 Alloys",
+      category: "Industrial B2B Website",
+      tools: "Wordpress, Custom Theme, SEO, Keyword Research, Rank 1 in Google for Multiple Keywords",
+      fullPageImage: "/images/work/21alloys.webp",
     },
 
     {
