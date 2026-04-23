@@ -81,8 +81,11 @@
 }
 
 .carousel-slide {
-  min-width: 100%;
-  flex-shrink: 0;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   box-sizing: border-box;
   padding: 50px 0;
 }
@@ -273,6 +276,77 @@
   border-radius: 8px;
 }
 
+/* ── Full-page scroll image ── */
+.work-image-scroll-container {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 340px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+
+  /* Background image properties */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.work-image-scroll-container:hover,
+.work-image-scroll-container.is-scrolling {
+  border-color: rgba(255, 141, 29, 0.3);
+  box-shadow:
+    0 4px 30px rgba(255, 141, 29, 0.12),
+    0 0 60px rgba(255, 141, 29, 0.06),
+    0 0 0 1px rgba(255, 141, 29, 0.1);
+}
+
+/* Scroll hint overlay */
+.scroll-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.scroll-hint--hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}
+
+.scroll-hint-icon {
+  display: flex;
+  align-items: center;
+}
+
+.scroll-hint-dot {
+  animation: scrollDotBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDotBounce {
+  0%, 100% { cy: 7; }
+  50% { cy: 15; }
+}
+
 /* ── Responsive ── */
 @media only screen and (max-width: 1600px) {
   .carousel-arrow-left {
@@ -367,5 +441,14 @@
 
   .work-image img {
     max-height: 250px;
+  }
+
+  .work-image-scroll-container {
+    max-width: 100%;
+    height: 260px;
+  }
+
+  .scroll-hint span {
+    font-size: 11px;
   }
 }

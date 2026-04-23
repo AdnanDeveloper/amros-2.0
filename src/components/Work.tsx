@@ -12,34 +12,48 @@ const TABS = [
 const projectsData: Record<string, any[]> = {
   "Websites / App": [
     {
-      title: "Solid Starters",
-      category: "Low-Code Platform",
-      tools: "Angular, Next.js, NestJS, MongoDB",
-      image: "/images/Solidx.webp",
+      title: "White Camel",
+      category: "Ecommerce Website",
+      tools: "Wordpress, Woocommerce, Google Analytics, Mobile-first design, SEO Optimized",
+      fullPageImage: "/images/work/whitecamel.webp",
     },
     {
-      title: "Radix",
-      category: "E-Commerce",
-      tools: "Angular, Next.js, NestJS, CMS",
-      image: "/images/radix.webp",
+      title: "BDazzle",
+      category: "Fashion Ecommerce",
+      tools: "Wordpress, Woocommerce, Custom Design, Responsive",
+      fullPageImage: "/images/work/bdazzle.webp",
     },
     {
-      title: "Bond Cancellation",
-      category: "Import-Export Automation",
-      tools: "Angular, Next.js, NestJS, Workflows",
-      image: "/images/bond.webp",
+      title: "Nova Rugs",
+      category: "Bespoke Rugs & Carpets",
+      tools: "Wordpress, Custom Design, Catalog, SEO Optimized",
+      fullPageImage: "/images/work/novarugs.webp",
     },
     {
-      title: "Sapphire",
-      category: "CRM Platform",
-      tools: "AngularJS, NestJS, PostgreSQL",
-      image: "/images/sapphire.webp",
+      title: "BRIXS Media",
+      category: "Digital Marketing Agency",
+      tools: "Custom Design, Lead Generation, SEO, Performance Marketing",
+      fullPageImage: "/images/work/brixsmedia.webp",
     },
     {
-      title: "Mpro",
-      category: "Insurance Platform",
-      tools: "React.js, Node.js, Microservices",
-      image: "/images/Maxlife.webp",
+      title: "21 Alloys",
+      category: "Industrial B2B Website",
+      tools: "Wordpress, Custom Theme, SEO, Metal Weight Calculator",
+      fullPageImage: "/images/work/21alloys.webp",
+    },
+
+    {
+      title: "Burhani Decor",
+      category: "Interior & Wallpaper Store",
+      tools: "Wordpress, Woocommerce, Custom UI, Product Catalog",
+      fullPageImage: "/images/work/burhanidecor.webp",
+    },
+
+    {
+      title: "SM Dry Fruits",
+      category: "Organic Food Ecommerce",
+      tools: "Wordpress, Woocommerce, Product Filtering, Mobile-first",
+      fullPageImage: "/images/work/smdry.webp",
     },
   ],
   "Brand Creation": [
@@ -173,7 +187,7 @@ const Work = () => {
                       </div>
                     </div>
                     <div className="carousel-image-wrapper">
-                      <WorkImage image={project.image} alt={project.title} />
+                      <WorkImage image={project.image} alt={project.title} fullPageImage={project.fullPageImage} />
                     </div>
                   </div>
                 </div>
