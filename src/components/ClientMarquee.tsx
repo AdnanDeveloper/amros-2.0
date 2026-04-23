@@ -15,6 +15,7 @@ const CLIENTS = [
   { id: 6, src: "/images/client/6.png", alt: "Client 6 Logo" },
   { id: 7, src: "/images/client/7.png", alt: "Client 7 Logo" },
   { id: 8, src: "/images/client/8.png", alt: "Client 8 Logo" },
+  { id: 9, src: "/images/client/9.png", alt: "Client 9 Logo" },
 ];
 
 export default function ClientMarquee() {
